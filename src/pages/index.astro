@@ -8,7 +8,7 @@ import { projects } from "../data/projects";
 
 const title = "Riptides Labs";
 const description =
-  "Open-source projects from Riptides for workload identity and secretless access: tokenex, Waterwheel, KeyLedger and more.";
+  "The open-source side of Riptides, runtime machine IAM for AI agents: tokenex, Waterwheel, KeyLedger and more for workload identity and secretless access.";
 ---
 
 <!doctype html>
@@ -39,14 +39,17 @@ const description =
       <Hero />
       <section id="projects" class="container projects">
         <h2>Projects</h2>
-        <p class="intro">Libraries, tools and demos, all open source on GitHub.</p>
+        <p class="intro">Each one is open source on GitHub.</p>
         <div class="grid">
           {projects.map((project) => <Project project={project} />)}
         </div>
       </section>
     </main>
     <footer class="container footer">
-      <p>Riptides Labs is the open-source work of <a href="https://riptides.io">Riptides</a>.</p>
+      <p>
+        Riptides Labs is the open-source side of <a href="https://riptides.io">Riptides</a>, runtime
+        machine IAM for AI agents.
+      </p>
     </footer>
   </body>
 </html>
