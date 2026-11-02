@@ -1,18 +1,37 @@
 ---
-// The title and what Riptides Labs is.
+// The title, what Riptides Labs is, two links, and the Riptides swirl on the
+// right (wide screens only; the header already has the logo).
+import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
 ---
 
 <section class="hero container">
-  <h1>Riptides Labs</h1>
-  <p class="tagline">
-    The open-source side of Riptides: libraries, tools and demos for workload identity and
-    secretless access. Riptides itself is runtime machine IAM for AI agents, at
-    <a href="https://riptides.io">riptides.io</a>.
-  </p>
+  <div class="copy">
+    <h1>Riptides Labs</h1>
+    <p class="tagline">
+      The open-source side of Riptides: libraries, tools and demos for workload identity and
+      secretless access. Riptides itself is runtime machine IAM for AI agents, at
+      <a href="https://riptides.io">riptides.io</a>.
+    </p>
+    <div class="actions">
+      <a class="button primary" href="https://github.com/riptideslabs">
+        <Icon name="github" />
+        Browse on GitHub
+      </a>
+      <a class="button" href="https://riptides.io">
+        riptides.io
+        <Icon name="external" />
+      </a>
+    </div>
+  </div>
+  <div class="mark"><Mark /></div>
 </section>
 
 <style>
   .hero {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
     padding-block: clamp(3rem, 2rem + 6vmin, 5.5rem) 1.5rem;
   }
 
@@ -30,5 +49,60 @@
     max-width: 38rem;
     font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
     line-height: 1.6;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    border: 1px solid var(--color-gray-4);
+    border-radius: 0.375rem;
+    color: var(--color-white);
+    font-size: 0.9375rem;
+    font-weight: 550;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .button:hover {
+    border-color: var(--color-gray-3);
+  }
+  .button.primary {
+    border-color: transparent;
+    background: var(--color-accent);
+    color: var(--color-black);
+  }
+  .button.primary:hover {
+    background: color-mix(in srgb, var(--color-accent) 88%, var(--color-white));
+  }
+  .button :global(svg) {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .mark {
+    display: none;
+  }
+  @media (min-width: 50rem) {
+    .hero {
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+    }
+    .mark {
+      display: block;
+      margin-right: clamp(0rem, -4rem + 8vw, 4rem);
+      color: var(--color-brand);
+    }
+    .mark :global(svg) {
+      display: block;
+      width: clamp(9rem, 2rem + 12vw, 14rem);
+      height: auto;
+    }
   }
 </style>

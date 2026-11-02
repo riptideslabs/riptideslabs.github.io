@@ -18,6 +18,8 @@
   --color-accent: #9176ef;
   --color-accent-high: #e4ddfd;
   --color-text-accent: var(--color-accent-high);
+  /* The brand purple itself, for graphics in both themes. */
+  --color-brand: #9176ef;
 
   --color-bg-nav: #0a0e13;
 
