@@ -1,137 +1,34 @@
 ---
-// Waterwheel's hero: a pill, the title and tagline, the actions, and a
-// picture on the right.
-import Icon from "./Icon.astro";
-import Ripples from "./Ripples.astro";
+// The title and what Riptides Labs is.
 ---
 
-<section class="hero">
-  <div class="container grid">
-    <div class="copy">
-      <a class="pill" href="https://riptideslabs.github.io/waterwheel/">
-        <span class="dot" aria-hidden="true"></span>
-        <span>New: Waterwheel<span class="more">, workload identity for Kubernetes</span></span>
-      </a>
-      <h1>Riptides Labs</h1>
-      <p class="tagline">
-        The open-source side of Riptides: libraries, tools and demos for workload identity and
-        secretless access. Riptides itself is runtime machine IAM for AI agents, at
-        <a href="https://riptides.io">riptides.io</a>.
-      </p>
-      <div class="actions">
-        <a class="button primary" href="#projects">See the projects <Icon name="down" /></a>
-        <a class="button minimal" href="https://riptides.io">riptides.io <Icon name="external" /></a>
-        <a class="button minimal" href="https://github.com/riptideslabs">GitHub <Icon name="github" /></a>
-      </div>
-    </div>
-    <Ripples />
-  </div>
+<section class="hero container">
+  <h1>Riptides Labs</h1>
+  <p class="tagline">
+    The open-source side of Riptides: libraries, tools and demos for workload identity and
+    secretless access. Riptides itself is runtime machine IAM for AI agents, at
+    <a href="https://riptides.io">riptides.io</a>.
+  </p>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
-
-  /* A dot grid that fades out from the middle. */
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0) 0 0 / 22px 22px;
-    mask-image: radial-gradient(ellipse 70% 65% at 60% 45%, #000 20%, transparent 75%);
-    pointer-events: none;
-  }
-
-  .grid {
-    display: grid;
-    gap: 2.5rem;
-    align-items: center;
-    padding-block: 2.5rem 1.5rem;
-  }
-
-  .copy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.3rem 0.85rem 0.3rem 0.7rem;
-    border: 1px solid var(--color-gray-5);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--color-gray-6) 70%, transparent);
-    color: var(--color-gray-2);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .pill:hover {
-    border-color: var(--color-accent);
-    color: var(--color-white);
-  }
-  @media (max-width: 30rem) {
-    .more { display: none; }
-  }
-  .dot {
-    flex: none;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 50%;
-    background: var(--color-accent);
-    animation: pulse 2.4s ease-out infinite;
+    padding-block: clamp(3rem, 2rem + 6vmin, 5.5rem) 1.5rem;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.75rem, 1.5rem + 5vw, 4.75rem);
+    font-size: clamp(2.5rem, 1.6rem + 3.5vw, 3.75rem);
     font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    background: linear-gradient(115deg, var(--color-white) 35%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--color-white);
   }
 
   .tagline {
-    margin: 0;
-    max-width: 34rem;
-    font-size: clamp(1rem, 0.9rem + 0.6vw, 1.25rem);
+    margin: 1.25rem 0 0;
+    max-width: 38rem;
+    font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
     line-height: 1.6;
-    color: var(--color-gray-2);
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 55%, transparent); }
-    70%, 100% { box-shadow: 0 0 0 0.45rem transparent; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .dot { animation: none; }
-  }
-
-  @media (min-width: 50rem) {
-    .grid {
-      grid-template-columns: 7fr 5fr;
-      gap: 3rem;
-      padding-block: clamp(3rem, 1rem + 8vmin, 7rem) clamp(2rem, 1rem + 4vmin, 4rem);
-    }
   }
 </style>

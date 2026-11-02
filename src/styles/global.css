@@ -3,6 +3,7 @@
    bare :root; the light theme overrides it. */
 :root {
   --font: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --color-white: #f4f7fb;
   --color-gray-1: #e3e9f0;
@@ -19,10 +20,6 @@
   --color-text-accent: var(--color-accent-high);
 
   --color-bg-nav: #0a0e13;
-
-  /* Hero decoration. */
-  --dot: rgb(255 255 255 / 0.07);
-  --glow: 0.22;
 
   color-scheme: dark;
 }
@@ -43,9 +40,6 @@
   --color-text-accent: var(--color-accent);
 
   --color-bg-nav: #ffffff;
-
-  --dot: rgb(11 18 32 / 0.08);
-  --glow: 0.16;
 
   color-scheme: light;
 }
@@ -93,54 +87,6 @@ a {
   }
 }
 
-/* Buttons: a glowing primary, outlined pills for the rest. */
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.5rem 1.125rem;
-  border: 1px solid transparent;
-  border-radius: 999rem;
-  font-size: 0.875rem;
-  font-weight: 550;
-  line-height: 1.2;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
-}
-.button svg {
-  width: 1.1em;
-  height: 1.1em;
-  flex: none;
-}
-.button.primary {
-  background: linear-gradient(135deg, var(--color-accent-high), var(--color-accent));
-  color: var(--color-black);
-  box-shadow: 0 8px 24px -10px var(--color-accent);
-}
-:root[data-theme="light"] .button.primary {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-high));
-}
-.button.primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px -10px var(--color-accent);
-}
-.button.minimal {
-  border-color: var(--color-gray-5);
-  background: color-mix(in srgb, var(--color-gray-6) 60%, transparent);
-  color: var(--color-gray-1);
-}
-.button.minimal:hover {
-  border-color: var(--color-gray-4);
-  color: var(--color-white);
-}
-@media (min-width: 50rem) {
-  .button {
-    padding: 0.875rem 1.25rem;
-    font-size: 1rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .button, .button:hover { transition: none; transform: none; }
 }
