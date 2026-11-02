@@ -1,0 +1,125 @@
+---
+// A frosted bar with the mark, the links and the theme switch.
+import Icon from "./Icon.astro";
+import Mark from "./Mark.astro";
+---
+
+<header class="header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <Mark />
+      Riptides Labs
+    </a>
+    <nav aria-label="Links">
+      <a class="link" href="https://riptides.io">riptides.io</a>
+      <a class="icon-link" href="https://github.com/riptideslabs" aria-label="Riptides Labs on GitHub">
+        <Icon name="github" />
+      </a>
+      <button class="icon-link theme" type="button" aria-label="Switch theme">
+        <span class="to-light"><Icon name="sun" /></span>
+        <span class="to-dark"><Icon name="moon" /></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // The choice is stored under Starlight's key, so it carries over to the
+  // project sites on this origin, such as /waterwheel/.
+  const button = document.querySelector<HTMLButtonElement>(".theme");
+  const label = () => {
+    const light = document.documentElement.dataset.theme === "light";
+    button?.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+  };
+  label();
+  button?.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("starlight-theme", next);
+    } catch {}
+    label();
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-bg-nav) 72%, transparent);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--color-gray-5);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 4rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-white);
+    font-size: 1.125rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .brand :global(svg) {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--color-accent);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .link {
+    padding: 0.4rem 0.6rem;
+    color: var(--color-gray-2);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .icon-link {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.6rem;
+    background: none;
+    color: var(--color-gray-2);
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+  }
+  .icon-link :global(svg) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .link:hover,
+  .icon-link:hover {
+    color: var(--color-white);
+  }
+  .icon-link:hover {
+    background: var(--color-gray-6);
+  }
+
+  .to-light,
+  .to-dark {
+    display: grid;
+  }
+  :global(:root[data-theme="light"]) .to-light,
+  :global(:root:not([data-theme="light"])) .to-dark {
+    display: none;
+  }
+</style>

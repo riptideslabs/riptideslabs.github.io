@@ -1,0 +1,156 @@
+---
+// One project card: icon, name, description, language and links. The card
+// style is Waterwheel's Feature card.
+import { languages, type Project } from "../data/projects";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: Project;
+}
+
+const icons: Record<Project["icon"], string> = {
+  exchange: '<path d="M4 8.5h14"/><path d="m14.5 5 3.5 3.5-3.5 3.5"/><path d="M20 15.5H6"/><path d="M9.5 12 6 15.5 9.5 19"/>',
+  wheel: '<circle cx="12" cy="10" r="5"/><circle cx="12" cy="10" r="1.2"/><path d="M12 5V2.5M17 10h2.5M12 15v2.5M7 10H4.5M15.5 6.5l1.8-1.8M15.5 13.5l1.8 1.8M8.5 13.5l-1.8 1.8M8.5 6.5 6.7 4.7"/><path d="M3 21c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/>',
+  key: '<circle cx="8" cy="15.5" r="4.5"/><path d="m11.2 12.3 8.3-8.3"/><path d="m16.5 7 2.5 2.5"/><path d="m14 9.5 2 2"/>',
+  sign: '<path d="M14.5 5.5 18.5 9.5 9 19H5v-4z"/><path d="m12.5 7.5 4 4"/><path d="M13 19h6"/>',
+  box: '<path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><path d="m4 7.4 8 4.6 8-4.6"/><path d="M12 12v9.2"/>',
+  terminal: '<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5"/><path d="M12.5 15H17"/>',
+  play: '<circle cx="12" cy="12" r="8.5"/><path d="M10.2 8.8v6.4l5-3.2z"/>',
+};
+
+const { project } = Astro.props;
+const { name, description, language, icon, site } = project;
+const repo = `https://github.com/riptideslabs/${name}`;
+---
+
+<article class="project">
+  <span class="icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" set:html={icons[icon]} />
+  </span>
+  <h3>{name}</h3>
+  <p class="description">{description}</p>
+  <div class="meta">
+    <span class="language">
+      <span class="swatch" style={`--swatch: ${languages[language]}`} aria-hidden="true"></span>
+      {language}
+    </span>
+    <span class="links">
+      <a href={repo} aria-label={`${name} on GitHub`}>
+        <Icon name="github" />
+        GitHub
+      </a>
+      {
+        site && (
+          <a href={site.href} aria-label={`${name} ${site.label.toLowerCase()}`}>
+            <Icon name="external" />
+            {site.label}
+          </a>
+        )
+      }
+    </span>
+  </div>
+</article>
+
+<style>
+  .project {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-5);
+    border-radius: 1rem;
+    background: linear-gradient(180deg, var(--color-gray-6), color-mix(in srgb, var(--color-gray-6) 30%, transparent));
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .project:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-gray-5));
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -16px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    background: var(--color-accent-low);
+    color: var(--color-accent-high);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  }
+  .icon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  h3 {
+    margin: 0.4rem 0 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-white);
+  }
+
+  .description {
+    flex: 1;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--color-gray-2);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 0.6rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--color-gray-5);
+    font-size: 0.8125rem;
+  }
+  .language {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-gray-3);
+  }
+  .swatch {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--swatch);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+  }
+  .links {
+    display: inline-flex;
+    gap: 1rem;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 550;
+    color: var(--color-text-accent);
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .links :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project, .project:hover { transition: none; transform: none; }
+  }
+</style>
