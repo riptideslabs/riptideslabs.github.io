@@ -22,6 +22,7 @@ export const projects: Project[] = [
     description:
       "A Go library that exchanges identity tokens for temporary cloud credentials, with built-in support for AWS, GCP, Azure, OCI, Kubernetes and OAuth2.",
     language: "Go",
+    site: { label: "Website", href: "https://riptideslabs.github.io/tokenex/" },
   },
   {
     name: "waterwheel",
