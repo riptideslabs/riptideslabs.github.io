@@ -27,7 +27,7 @@ export const projects: Project[] = [
   {
     name: "waterwheel",
     description:
-      "Workload identity for Kubernetes: pods call AI and cloud APIs with short-lived tokens, and never hold a key.",
+      "Workload identity for Kubernetes: pods call AI and cloud APIs without long-lived API keys. Early preview.",
     language: "Go",
     isNew: true,
     site: { label: "Website", href: "https://riptideslabs.github.io/waterwheel/" },
